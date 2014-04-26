@@ -1,0 +1,26 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    xmlns:plone="http://namespaces.plone.org/plone"
+    i18n_domain="paragon.site">
+
+    <!-- Set overrides folder for Just-a-Bunch-Of-Templates product -->
+    <include package="z3c.jbot" file="meta.zcml" />
+    <browser:jbot directory="overrides" layer="..interfaces.IParagonSiteLayer" />
+
+    <browser:page
+      name="addonview"
+      for="paragon.site.content.addon.IAddon"
+      class=".views.AddonView"
+      template="addonview.pt"
+      layer="..interfaces.IParagonSiteLayer"
+      permission="zope2.View"
+      />
+
+    <!-- Publish static files -->
+    <browser:resourceDirectory
+      name="paragon.site"
+      directory="static"
+      />
+
+</configure>
