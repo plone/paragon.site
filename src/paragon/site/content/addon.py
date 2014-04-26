@@ -15,15 +15,6 @@ from zope.schema.vocabulary import SimpleVocabulary
 
 from paragon.site import _
 
-my_vocab = SimpleVocabulary(
-    [SimpleTerm(value=True,
-                title=_(u'Yes')),
-     SimpleTerm(value=False,
-                title=_(u'No')),
-     SimpleTerm(value=u'does_not_apply',
-                title=_(u'Does not apply')),]
-)
-
 product_categories = SimpleVocabulary(
     [SimpleTerm(value=u'auth_and_user',
                 title=_(u'Authentication and user management')),
@@ -78,38 +69,35 @@ certification_options = SimpleVocabulary(
 )
 
 
-certification_checklist = [
-    'pypi_page',
-    'updated_last_plone_version',
-    'dexterity_ready',
-    'proper_screenshots',
-    'used_in_production',
-    'install_uninstall_profile',
-    'code_structure',
-    'maintained',
-    'internal_documentation',
-    'enduser_documentation',
-    'tested',
-    'i18n',
-]
+certification_checklist = SimpleVocabulary(
+    [SimpleTerm(value=u'pypi_page',
+                title=_(u'Has a curated PyPi page (README.rst/README.md)')),
+     SimpleTerm(value=u'public_repo',
+                title=_(u'Has a public and open to contributions repo (GitHub/BitBucket, etc)')),
+     SimpleTerm(value=u'updated_last_plone_version',
+                title=_(u'Works on latest Plone version')),
+     SimpleTerm(value=u'dexterity_ready',
+                title=_(u'Dexterity ready')),
+     SimpleTerm(value=u'proper_screenshots',
+                title=_(u'Has proper screenshots')),
+     SimpleTerm(value=u'used_in_production',
+                title=_(u'Widely used in production')),
+     SimpleTerm(value=u'install_uninstall_profile',
+                title=_(u'Uninstall profile, installs and uninstalls cleanly')),
+     SimpleTerm(value=u'code_structure',
+                title=_(u'Code structure follows best practice')),
+     SimpleTerm(value=u'maintained',
+                title=_(u'Existed and maintained for at least 6 months')),
+     SimpleTerm(value=u'internal_documentation',
+                title=_(u'Internal documentation (documentation, interfaces, etc.)')),
+     SimpleTerm(value=u'enduser_documentation',
+                title=_(u'End-user documentation')),
+     SimpleTerm(value=u'tested',
+                title=_(u'Fair test coverage')),
+     SimpleTerm(value=u'i18n',
+                title=_(u'Internationalized')), ]
+)
 
-labels = [
-    _(u'Has a curated PyPi page (README.rst/README.md)'),
-    _(u'Has a public and open to contributions repo (GitHub/BitBucket, etc)'),
-    _(u'Works on latest Plone version'),
-    _(u'Dexterity ready'),
-    _(u'Has proper screenshots'),
-    _(u'Widely used in production'),
-    _(u'Uninstall profile, installs and uninstalls cleanly'),
-    _(u'Code structure follows best practice'),
-    _(u'Existed and maintained for at least 6 months'),
-    _(u'Internal documentation (documentation, interfaces, etc.)'),
-    _(u'End-user documentation'),
-    _(u'Fair test coverage'),
-    _(u'Internationalized'),
-]
-
-my_fields = ['huhu', 'baba']
 
 class IAddon(model.Schema):
     """ A Plone product
@@ -121,11 +109,11 @@ class IAddon(model.Schema):
         fields=['pypi_link', 'github_link', 'homepage']
     )
 
-    # form.fieldset(
-        # 'quality',
-        # label=u'Quality review',
-        # fields=['certification', ]
-    # )
+    form.fieldset(
+        'quality',
+        label=u'Quality review',
+        fields=['certification', ]
+    )
 
     title = schema.TextLine(
         title=_PMF(u'label_title', default=u'Title'),
@@ -172,20 +160,14 @@ class IAddon(model.Schema):
         required=False
     )
 
-    # form.widget(certification=CheckBoxFieldWidget)
-    # certification = schema.Set(
-    #     title=_(u'Certification checklist'),
-    #     description=_(u'This is the feature checklist of add-on developing. Once the product accomplish all of them, you can send it for review and earn the certified add-on badge.'),
-    #     value_type=schema.Choice(
-    #         vocabulary=certification_checklist),
-    #     required=False
-    # )
-
-    for i in certification_checklist:
-        i = schema.Choice(
-            title=u'uhuh',
-            vocabulary=my_vocab,
-        )
+    form.widget(certification=CheckBoxFieldWidget)
+    certification = schema.Set(
+        title=_(u'Certification checklist'),
+        description=_(u'This is the feature checklist of add-on developing. Once the product accomplish all of them, you can send it for review and earn the certified add-on badge.'),
+        value_type=schema.Choice(
+            vocabulary=certification_checklist),
+        required=False
+    )
 
 
 @indexer(IAddon)
