@@ -1,0 +1,13 @@
+<configure
+  xmlns="http://namespaces.zope.org/zope"
+  xmlns:zcml="http://namespaces.zope.org/zcml"
+  i18n_domain="plone">
+
+  <configure zcml:condition="installed AccessControl.security">
+    <permission
+      id="paragon.site.addAddon"
+      title="paragon.site: Add Addon"
+      />
+  </configure>
+
+</configure>

@@ -1,20 +1,19 @@
 # -*- coding: utf-8 -*-
 from five import grok
-from z3c.form.browser.checkbox import CheckBoxFieldWidget
-from z3c.form.browser.radio import RadioFieldWidget
-from plone.app.dexterity import PloneMessageFactory as _PMF
+from paragon.site import _
+# from plone.app.dexterity import PloneMessageFactory as _PMF
 from plone.app.textfield import RichText
 from plone.directives import form
 from plone.formwidget.multifile import MultiFileFieldWidget
+# from plone.formwidget.recaptcha.widget import ReCaptchaFieldWidget
 from plone.indexer import indexer
 from plone.namedfile.field import NamedBlobImage
 from plone.supermodel import model
-
+from z3c.form.browser.checkbox import CheckBoxFieldWidget
+from z3c.form.browser.radio import RadioFieldWidget
 from zope import schema
 from zope.schema.vocabulary import SimpleTerm
 from zope.schema.vocabulary import SimpleVocabulary
-
-from paragon.site import _
 
 product_categories = SimpleVocabulary(
     [SimpleTerm(value=u'auth_and_user',
@@ -67,7 +66,7 @@ certification_vocabulary = SimpleVocabulary(
      SimpleTerm(value=u'does_not_apply',
                 title=_(u'Does not apply')),
      SimpleTerm(value=u'todo',
-                title=_(u'We have to find out')),
+                title=_(u'Find out')),
      ]
 )
 
@@ -132,6 +131,13 @@ class IAddon(model.Schema):
             vocabulary=product_categories),
         required=False,
     )
+
+    # form.widget(captcha=ReCaptchaFieldWidget)
+    # captcha = schema.TextLine(
+    #     title=u"ReCaptcha",
+    #     description=u"",
+    #     required=False,
+    # )
 
     pypi_link = schema.TextLine(
         title=_(u'Pypi URL'),
@@ -241,6 +247,7 @@ class IAddon(model.Schema):
         vocabulary=certification_vocabulary,
         required=True,
     )
+
 
 @indexer(IAddon)
 def addon_categories(context):

@@ -44,6 +44,7 @@ setup(
         'plone.app.dexterity [grok, relations]',
         'plone.formwidget.multifile',
         'plone.app.referenceablebehavior',
+        'plone.formwidget.recaptcha',
     ],
     entry_points="""
     [z3c.autoinclude.plugin]
