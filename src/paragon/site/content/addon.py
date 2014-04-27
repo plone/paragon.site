@@ -103,7 +103,10 @@ class IAddon(model.Schema):
     )
 
     title = schema.TextLine(
-        title=_PMF(u'label_title', default=u'Title'),
+        title=_(u'package_name', default=u'Name of the Addon'),
+        description=_(
+            u'as_used_in_buildout',
+            default=u'The name you have to add to a buildout (e.g. Products.PloneFormGen)'),
         required=True,
     )
 
