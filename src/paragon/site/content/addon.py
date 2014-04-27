@@ -60,9 +60,9 @@ product_categories = SimpleVocabulary(
 )
 
 certification_vocabulary = SimpleVocabulary(
-    [SimpleTerm(value=True,
+    [SimpleTerm(value=u'true',
                 title=_(u'Yes')),
-     SimpleTerm(value=False,
+     SimpleTerm(value=u'false',
                 title=_(u'No')),
      SimpleTerm(value=u'does_not_apply',
                 title=_(u'Does not apply')),
@@ -155,94 +155,92 @@ class IAddon(model.Schema):
     pypi_page = schema.Choice(
         title=_(u'Has a curated PyPi page (README.rst/README.md)'),
         vocabulary=certification_vocabulary,
-        required=False,
+        required=True,
     )
 
     form.widget(public_repo=RadioFieldWidget)
     public_repo = schema.Choice(
         title=_(u'Has a public and open to contributions repo (GitHub/BitBucket, etc)'),
         vocabulary=certification_vocabulary,
-        required=False,
+        required=True,
     )
 
     form.widget(updated_last_plone_version=RadioFieldWidget)
     updated_last_plone_version = schema.Choice(
         title=_(u'Works on latest Plone version'),
         vocabulary=certification_vocabulary,
-        required=False,
+        required=True,
     )
 
     form.widget(dexterity_ready=RadioFieldWidget)
     dexterity_ready = schema.Choice(
         title=_(u'Dexterity ready'),
         vocabulary=certification_vocabulary,
-        required=False,
+        required=True,
     )
 
     form.widget(proper_screenshots=RadioFieldWidget)
     proper_screenshots = schema.Choice(
         title=_(u'Has proper screenshots'),
         vocabulary=certification_vocabulary,
-        required=False,
+        required=True,
     )
 
     form.widget(used_in_production=RadioFieldWidget)
     used_in_production = schema.Choice(
         title=_(u'Widely used in production'),
         vocabulary=certification_vocabulary,
-        required=False,
+        required=True,
     )
 
     form.widget(install_uninstall_profile=RadioFieldWidget)
     install_uninstall_profile = schema.Choice(
         title=_(u'Uninstall profile, installs and uninstalls cleanly'),
         vocabulary=certification_vocabulary,
-        required=False,
+        required=True,
     )
 
     form.widget(code_structure=RadioFieldWidget)
     code_structure = schema.Choice(
         title=_(u'Code structure follows best practice'),
         vocabulary=certification_vocabulary,
-        required=False,
+        required=True,
     )
 
     form.widget(maintained=RadioFieldWidget)
     maintained = schema.Choice(
         title=_(u'Existed and maintained for at least 6 months'),
         vocabulary=certification_vocabulary,
-        required=False,
+        required=True,
     )
 
     form.widget(internal_documentation=RadioFieldWidget)
     internal_documentation = schema.Choice(
         title=_(u'Internal documentation (documentation, interfaces, etc.)'),
         vocabulary=certification_vocabulary,
-        required=False,
+        required=True,
     )
 
     form.widget(enduser_documentation=RadioFieldWidget)
     enduser_documentation = schema.Choice(
         title=_(u'End-user documentation'),
         vocabulary=certification_vocabulary,
-        required=False,
+        required=True,
     )
 
     form.widget(tested=RadioFieldWidget)
     tested = schema.Choice(
         title=_(u'Fair test coverage'),
         vocabulary=certification_vocabulary,
-        required=False,
+        required=True,
     )
 
     form.widget(i18n=RadioFieldWidget)
     i18n = schema.Choice(
         title=_(u'Internationalized'),
         vocabulary=certification_vocabulary,
-        required=False,
+        required=True,
     )
-
-
 
 @indexer(IAddon)
 def addon_categories(context):
