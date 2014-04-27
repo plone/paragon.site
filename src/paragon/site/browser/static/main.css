@@ -1,0 +1,8 @@
+#fieldset-quality span.option {
+    display: inline-block;
+    margin-right: 20px;
+}
+
+#fieldset-quality span.option span.label {
+    font-weight: normal;
+}
