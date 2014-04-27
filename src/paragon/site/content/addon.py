@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from five import grok
 from z3c.form.browser.checkbox import CheckBoxFieldWidget
+from z3c.form.browser.radio import RadioFieldWidget
 from plone.app.dexterity import PloneMessageFactory as _PMF
 from plone.app.textfield import RichText
 from plone.directives import form
@@ -58,44 +59,16 @@ product_categories = SimpleVocabulary(
                 title=_(u'Other'))]
 )
 
-certification_options = SimpleVocabulary(
+certification_vocabulary = SimpleVocabulary(
     [SimpleTerm(value=True,
                 title=_(u'Yes')),
      SimpleTerm(value=False,
                 title=_(u'No')),
      SimpleTerm(value=u'does_not_apply',
                 title=_(u'Does not apply')),
+     SimpleTerm(value=u'todo',
+                title=_(u'We have to find out')),
      ]
-)
-
-
-certification_checklist = SimpleVocabulary(
-    [SimpleTerm(value=u'pypi_page',
-                title=_(u'Has a curated PyPi page (README.rst/README.md)')),
-     SimpleTerm(value=u'public_repo',
-                title=_(u'Has a public and open to contributions repo (GitHub/BitBucket, etc)')),
-     SimpleTerm(value=u'updated_last_plone_version',
-                title=_(u'Works on latest Plone version')),
-     SimpleTerm(value=u'dexterity_ready',
-                title=_(u'Dexterity ready')),
-     SimpleTerm(value=u'proper_screenshots',
-                title=_(u'Has proper screenshots')),
-     SimpleTerm(value=u'used_in_production',
-                title=_(u'Widely used in production')),
-     SimpleTerm(value=u'install_uninstall_profile',
-                title=_(u'Uninstall profile, installs and uninstalls cleanly')),
-     SimpleTerm(value=u'code_structure',
-                title=_(u'Code structure follows best practice')),
-     SimpleTerm(value=u'maintained',
-                title=_(u'Existed and maintained for at least 6 months')),
-     SimpleTerm(value=u'internal_documentation',
-                title=_(u'Internal documentation (documentation, interfaces, etc.)')),
-     SimpleTerm(value=u'enduser_documentation',
-                title=_(u'End-user documentation')),
-     SimpleTerm(value=u'tested',
-                title=_(u'Fair test coverage')),
-     SimpleTerm(value=u'i18n',
-                title=_(u'Internationalized')), ]
 )
 
 
@@ -112,7 +85,21 @@ class IAddon(model.Schema):
     form.fieldset(
         'quality',
         label=u'Quality review',
-        fields=['certification', ]
+        fields=[
+            'pypi_page',
+            'public_repo',
+            'updated_last_plone_version',
+            'dexterity_ready',
+            'proper_screenshots',
+            'used_in_production',
+            'install_uninstall_profile',
+            'code_structure',
+            'maintained',
+            'internal_documentation',
+            'enduser_documentation',
+            'tested',
+            'i18n',
+        ]
     )
 
     title = schema.TextLine(
@@ -135,6 +122,7 @@ class IAddon(model.Schema):
         required=False,
     )
 
+    form.widget(categories=CheckBoxFieldWidget)
     categories = schema.List(
         title=_(u'Categories'),
         value_type=schema.Choice(
@@ -160,14 +148,97 @@ class IAddon(model.Schema):
         required=False
     )
 
-    form.widget(certification=CheckBoxFieldWidget)
-    certification = schema.Set(
-        title=_(u'Certification checklist'),
-        description=_(u'This is the feature checklist of add-on developing. Once the product accomplish all of them, you can send it for review and earn the certified add-on badge.'),
-        value_type=schema.Choice(
-            vocabulary=certification_checklist),
-        required=False
+    form.widget(pypi_page=RadioFieldWidget)
+    pypi_page = schema.Choice(
+        title=_(u'Has a curated PyPi page (README.rst/README.md)'),
+        vocabulary=certification_vocabulary,
+        required=False,
     )
+
+    form.widget(public_repo=RadioFieldWidget)
+    public_repo = schema.Choice(
+        title=_(u'Has a public and open to contributions repo (GitHub/BitBucket, etc)'),
+        vocabulary=certification_vocabulary,
+        required=False,
+    )
+
+    form.widget(updated_last_plone_version=RadioFieldWidget)
+    updated_last_plone_version = schema.Choice(
+        title=_(u'Works on latest Plone version'),
+        vocabulary=certification_vocabulary,
+        required=False,
+    )
+
+    form.widget(dexterity_ready=RadioFieldWidget)
+    dexterity_ready = schema.Choice(
+        title=_(u'Dexterity ready'),
+        vocabulary=certification_vocabulary,
+        required=False,
+    )
+
+    form.widget(proper_screenshots=RadioFieldWidget)
+    proper_screenshots = schema.Choice(
+        title=_(u'Has proper screenshots'),
+        vocabulary=certification_vocabulary,
+        required=False,
+    )
+
+    form.widget(used_in_production=RadioFieldWidget)
+    used_in_production = schema.Choice(
+        title=_(u'Widely used in production'),
+        vocabulary=certification_vocabulary,
+        required=False,
+    )
+
+    form.widget(install_uninstall_profile=RadioFieldWidget)
+    install_uninstall_profile = schema.Choice(
+        title=_(u'Uninstall profile, installs and uninstalls cleanly'),
+        vocabulary=certification_vocabulary,
+        required=False,
+    )
+
+    form.widget(code_structure=RadioFieldWidget)
+    code_structure = schema.Choice(
+        title=_(u'Code structure follows best practice'),
+        vocabulary=certification_vocabulary,
+        required=False,
+    )
+
+    form.widget(maintained=RadioFieldWidget)
+    maintained = schema.Choice(
+        title=_(u'Existed and maintained for at least 6 months'),
+        vocabulary=certification_vocabulary,
+        required=False,
+    )
+
+    form.widget(internal_documentation=RadioFieldWidget)
+    internal_documentation = schema.Choice(
+        title=_(u'Internal documentation (documentation, interfaces, etc.)'),
+        vocabulary=certification_vocabulary,
+        required=False,
+    )
+
+    form.widget(enduser_documentation=RadioFieldWidget)
+    enduser_documentation = schema.Choice(
+        title=_(u'End-user documentation'),
+        vocabulary=certification_vocabulary,
+        required=False,
+    )
+
+    form.widget(tested=RadioFieldWidget)
+    tested = schema.Choice(
+        title=_(u'Fair test coverage'),
+        vocabulary=certification_vocabulary,
+        required=False,
+    )
+
+    form.widget(i18n=RadioFieldWidget)
+    i18n = schema.Choice(
+        title=_(u'Internationalized'),
+        vocabulary=certification_vocabulary,
+        required=False,
+    )
+
 
 
 @indexer(IAddon)
