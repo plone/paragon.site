@@ -1,14 +1,12 @@
 # -*- coding: utf-8 -*-
-from five import grok
 from paragon.site import _
-# from plone.app.dexterity import PloneMessageFactory as _PMF
 from plone.app.textfield import RichText
-from plone.directives import form
+from plone.autoform import directives
 from plone.formwidget.multifile import MultiFileFieldWidget
-# from plone.formwidget.recaptcha.widget import ReCaptchaFieldWidget
 from plone.indexer import indexer
 from plone.namedfile.field import NamedBlobImage
 from plone.supermodel import model
+from plone.supermodel.directives import fieldset
 from z3c.form.browser.checkbox import CheckBoxFieldWidget
 from z3c.form.browser.radio import RadioFieldWidget
 from zope import schema
@@ -75,13 +73,13 @@ class IAddon(model.Schema):
     """ A Plone product
     """
 
-    form.fieldset(
+    fieldset(
         'URLs',
         label=u'URLs',
         fields=['pypi_link', 'github_link', 'homepage']
     )
 
-    form.fieldset(
+    fieldset(
         'quality',
         label=u'Quality review',
         fields=[
@@ -115,7 +113,7 @@ class IAddon(model.Schema):
         required=True,
     )
 
-    form.widget(screenshots=MultiFileFieldWidget)
+    directives.widget(screenshots=MultiFileFieldWidget)
     screenshots = schema.List(
         title=u'Screenshots',
         description=_(u'Upload some screenshots showing the main product '
@@ -124,7 +122,7 @@ class IAddon(model.Schema):
         required=False,
     )
 
-    form.widget(categories=CheckBoxFieldWidget)
+    directives.widget(categories=CheckBoxFieldWidget)
     categories = schema.List(
         title=_(u'Categories'),
         value_type=schema.Choice(
@@ -157,91 +155,91 @@ class IAddon(model.Schema):
         required=False
     )
 
-    form.widget(pypi_page=RadioFieldWidget)
+    directives.widget(pypi_page=RadioFieldWidget)
     pypi_page = schema.Choice(
         title=_(u'Has a curated PyPi page (README.rst/README.md)'),
         vocabulary=certification_vocabulary,
         required=True,
     )
 
-    form.widget(public_repo=RadioFieldWidget)
+    directives.widget(public_repo=RadioFieldWidget)
     public_repo = schema.Choice(
         title=_(u'Has a public and open to contributions repo (GitHub/BitBucket, etc)'),
         vocabulary=certification_vocabulary,
         required=True,
     )
 
-    form.widget(updated_last_plone_version=RadioFieldWidget)
+    directives.widget(updated_last_plone_version=RadioFieldWidget)
     updated_last_plone_version = schema.Choice(
         title=_(u'Works on latest Plone version'),
         vocabulary=certification_vocabulary,
         required=True,
     )
 
-    form.widget(dexterity_ready=RadioFieldWidget)
+    directives.widget(dexterity_ready=RadioFieldWidget)
     dexterity_ready = schema.Choice(
         title=_(u'Dexterity ready'),
         vocabulary=certification_vocabulary,
         required=True,
     )
 
-    form.widget(proper_screenshots=RadioFieldWidget)
+    directives.widget(proper_screenshots=RadioFieldWidget)
     proper_screenshots = schema.Choice(
         title=_(u'Has proper screenshots'),
         vocabulary=certification_vocabulary,
         required=True,
     )
 
-    form.widget(used_in_production=RadioFieldWidget)
+    directives.widget(used_in_production=RadioFieldWidget)
     used_in_production = schema.Choice(
         title=_(u'Widely used in production'),
         vocabulary=certification_vocabulary,
         required=True,
     )
 
-    form.widget(install_uninstall_profile=RadioFieldWidget)
+    directives.widget(install_uninstall_profile=RadioFieldWidget)
     install_uninstall_profile = schema.Choice(
         title=_(u'Uninstall profile, installs and uninstalls cleanly'),
         vocabulary=certification_vocabulary,
         required=True,
     )
 
-    form.widget(code_structure=RadioFieldWidget)
+    directives.widget(code_structure=RadioFieldWidget)
     code_structure = schema.Choice(
         title=_(u'Code structure follows best practice'),
         vocabulary=certification_vocabulary,
         required=True,
     )
 
-    form.widget(maintained=RadioFieldWidget)
+    directives.widget(maintained=RadioFieldWidget)
     maintained = schema.Choice(
         title=_(u'Existed and maintained for at least 6 months'),
         vocabulary=certification_vocabulary,
         required=True,
     )
 
-    form.widget(internal_documentation=RadioFieldWidget)
+    directives.widget(internal_documentation=RadioFieldWidget)
     internal_documentation = schema.Choice(
         title=_(u'Internal documentation (documentation, interfaces, etc.)'),
         vocabulary=certification_vocabulary,
         required=True,
     )
 
-    form.widget(enduser_documentation=RadioFieldWidget)
+    directives.widget(enduser_documentation=RadioFieldWidget)
     enduser_documentation = schema.Choice(
         title=_(u'End-user documentation'),
         vocabulary=certification_vocabulary,
         required=True,
     )
 
-    form.widget(tested=RadioFieldWidget)
+    directives.widget(tested=RadioFieldWidget)
     tested = schema.Choice(
         title=_(u'Fair test coverage'),
         vocabulary=certification_vocabulary,
         required=True,
     )
 
-    form.widget(i18n=RadioFieldWidget)
+    directives.widget(i18n=RadioFieldWidget)
     i18n = schema.Choice(
         title=_(u'Internationalized'),
         vocabulary=certification_vocabulary,
@@ -255,4 +253,3 @@ def addon_categories(context):
     populate the ``context.categories`` value and index it.
     """
     return context.categories
-grok.global_adapter(addon_categories, name='addon_categories')
