@@ -26,3 +26,24 @@ class AddonList(BrowserView):
                 state = brain.review_state
                 ))
         return results
+
+
+class AddonTable(BrowserView):
+
+    template = ViewPageTemplateFile('addontable.pt')
+
+    def items(self):
+        results = []
+        catalog = getToolByName(self.context, 'portal_catalog')
+        brains = catalog(portal_type='addon')
+        for brain in brains:
+            obj = brain.getObject()
+            results.append(dict(
+                title=brain.Title,
+                url=brain.getURL(),
+                pypi_link=obj.pypi_link,
+                github_link=obj.github_link,
+                state=brain.review_state,
+                categories=', '.join(obj.categories),
+                ))
+        return results

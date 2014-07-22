@@ -26,6 +26,15 @@
       permission="zope2.View"
       />
 
+    <browser:page
+      name="addontable"
+      for="*"
+      class=".views.AddonTable"
+      template="addontable.pt"
+      layer="..interfaces.IParagonSiteLayer"
+      permission="cmf.ReviewPortalContent"
+      />
+
     <!-- Publish static files -->
     <browser:resourceDirectory
       name="paragon.site"

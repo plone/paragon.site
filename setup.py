@@ -45,6 +45,7 @@ setup(
         'plone.formwidget.multifile',
         'plone.app.referenceablebehavior',
         'plone.formwidget.recaptcha',
+        'collective.js.datatables',
     ],
     entry_points="""
     [z3c.autoinclude.plugin]

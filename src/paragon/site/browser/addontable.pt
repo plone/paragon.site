@@ -1,0 +1,61 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      lang="en"
+      metal:use-macro="context/main_template/macros/master"
+      i18n:domain="plone">
+<body>
+
+<metal:head fill-slot="javascript_head_slot">
+    <link rel="stylesheet" type="text/css" media="screen" href="++resource++jquery.datatables/media/css/jquery.dataTables.css">
+
+    <script type="text/javascript" src="++resource++jquery.datatables.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            var oTable = $('#addons').dataTable({
+            });
+        })
+    </script>
+</metal:head>
+
+<metal:content-core fill-slot="content">
+    <metal:content-core define-macro="content">
+    <div id="content">
+        <h1 class="documentFirstHeading">
+            Top 50 Plone addons
+        </h1>
+
+        <h2>The following Addons have already been submitted</h2>
+        <table class="listing" id="addons">
+            <thead>
+            <tr>
+                <th>Title</th>
+                <th>Pypi-link</th>
+                <th>Github-link</th>
+                <th>Tags</th>
+                <th>State</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr tal:repeat="item view/items">
+                <td>
+                    <a href="" tal:attributes="href item/url" tal:content="item/title">
+                      Title
+                    </a>
+                </td>
+                <td><a tal:attributes="href item/pypi_link">pypi</a></td>
+                <td><a tal:attributes="href item/github_link">github</a></td>
+                <td tal:content="item/categories" />
+                <td tal:content="item/state" />
+            </tr>
+            </tbody>
+        </table>
+
+    </div>
+    </metal:content-core>
+</metal:content-core>
+
+</body>
+</html>
+
