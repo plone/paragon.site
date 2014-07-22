@@ -3,12 +3,17 @@
  <permission>Access contents information</permission>
  <permission>Change portal events</permission>
  <permission>Modify portal content</permission>
- <permission>View</permission>
  <permission>Request review</permission>
+ <permission>View</permission>
  <state state_id="accepted" title="Approved" >
+  <exit-transition transition_id="thumbsdown" />
+  <exit-transition transition_id="thumbsup" />
+
+
+
+ </state>
+ <state state_id="nicebutnocigar" title="Not in the Top 50" >
   <exit-transition transition_id="publish" />
-  <exit-transition transition_id="reject" />
-  <exit-transition transition_id="retract" />
 
 
 
@@ -91,10 +96,12 @@
 
 
  </state>
- <state state_id="published" title="Approved" >
+ <state state_id="published" title="For your consideration" >
   <description>Visible to everyone, editable by the owner.</description>
   <exit-transition transition_id="reject" />
   <exit-transition transition_id="retract" />
+  <exit-transition transition_id="thumbsdown" />
+  <exit-transition transition_id="thumbsup" />
   <permission-map name="Access contents information" acquired="False">
    <permission-role>Anonymous</permission-role>
   </permission-map>
@@ -116,6 +123,12 @@
 
 
  </state>
+ <state state_id="recommended" title="Recommended" >
+  <exit-transition transition_id="publish" />
+
+
+
+ </state>
  <state state_id="rejected" title="Rejected" >
   <exit-transition transition_id="retract" />
   <exit-transition transition_id="submit" />
@@ -130,7 +143,7 @@
   </guard>
 
  </transition>
- <transition transition_id="publish" title="Reviewer publishes content" new_state="published" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="publish" title="Reviewer publishes content for consideration by the jury" new_state="published" trigger="USER" before_script="" after_script="" >
   <description>Publishing the item makes it visible to other users.</description>
   <action url="%(content_url)s/content_status_modify?workflow_action=publish" category="workflow" icon="">Publish</action>
   <guard >
@@ -159,6 +172,20 @@
   <action url="%(content_url)s/content_status_modify?workflow_action=submit" category="workflow" icon="">Submit for publication</action>
   <guard >
    <guard-permission>Request review</guard-permission>
+  </guard>
+
+ </transition>
+ <transition transition_id="thumbsdown" title="Thumbs downs!" new_state="nicebutnocigar" trigger="USER" before_script="" after_script="" >
+
+  <guard >
+   <guard-role>Jury, Manager</guard-role>
+  </guard>
+
+ </transition>
+ <transition transition_id="thumbsup" title="Thumbs up!" new_state="recommended" trigger="USER" before_script="" after_script="" >
+
+  <guard >
+   <guard-role>Jury, Manager</guard-role>
   </guard>
 
  </transition>
