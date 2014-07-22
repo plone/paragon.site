@@ -159,6 +159,7 @@ class IAddon(model.Schema):
     pypi_page = schema.Choice(
         title=_(u'Has a curated PyPi page (README.rst/README.md)'),
         vocabulary=certification_vocabulary,
+        default=u"todo",
         required=True,
     )
 
@@ -166,6 +167,7 @@ class IAddon(model.Schema):
     public_repo = schema.Choice(
         title=_(u'Has a public and open to contributions repo (GitHub/BitBucket, etc)'),
         vocabulary=certification_vocabulary,
+        default=u"todo",
         required=True,
     )
 
@@ -173,6 +175,7 @@ class IAddon(model.Schema):
     updated_last_plone_version = schema.Choice(
         title=_(u'Works on latest Plone version'),
         vocabulary=certification_vocabulary,
+        default=u"todo",
         required=True,
     )
 
@@ -180,6 +183,7 @@ class IAddon(model.Schema):
     dexterity_ready = schema.Choice(
         title=_(u'Dexterity ready'),
         vocabulary=certification_vocabulary,
+        default=u"todo",
         required=True,
     )
 
@@ -187,6 +191,7 @@ class IAddon(model.Schema):
     proper_screenshots = schema.Choice(
         title=_(u'Has proper screenshots'),
         vocabulary=certification_vocabulary,
+        default=u"todo",
         required=True,
     )
 
@@ -194,6 +199,7 @@ class IAddon(model.Schema):
     used_in_production = schema.Choice(
         title=_(u'Widely used in production'),
         vocabulary=certification_vocabulary,
+        default=u"todo",
         required=True,
     )
 
@@ -201,6 +207,7 @@ class IAddon(model.Schema):
     install_uninstall_profile = schema.Choice(
         title=_(u'Uninstall profile, installs and uninstalls cleanly'),
         vocabulary=certification_vocabulary,
+        default=u"todo",
         required=True,
     )
 
@@ -208,6 +215,7 @@ class IAddon(model.Schema):
     code_structure = schema.Choice(
         title=_(u'Code structure follows best practice'),
         vocabulary=certification_vocabulary,
+        default=u"todo",
         required=True,
     )
 
@@ -215,6 +223,7 @@ class IAddon(model.Schema):
     maintained = schema.Choice(
         title=_(u'Existed and maintained for at least 6 months'),
         vocabulary=certification_vocabulary,
+        default=u"todo",
         required=True,
     )
 
@@ -222,6 +231,7 @@ class IAddon(model.Schema):
     internal_documentation = schema.Choice(
         title=_(u'Internal documentation (documentation, interfaces, etc.)'),
         vocabulary=certification_vocabulary,
+        default=u"todo",
         required=True,
     )
 
@@ -229,6 +239,7 @@ class IAddon(model.Schema):
     enduser_documentation = schema.Choice(
         title=_(u'End-user documentation'),
         vocabulary=certification_vocabulary,
+        default=u"todo",
         required=True,
     )
 
@@ -236,6 +247,7 @@ class IAddon(model.Schema):
     tested = schema.Choice(
         title=_(u'Fair test coverage'),
         vocabulary=certification_vocabulary,
+        default=u"todo",
         required=True,
     )
 
@@ -243,6 +255,7 @@ class IAddon(model.Schema):
     i18n = schema.Choice(
         title=_(u'Internationalized'),
         vocabulary=certification_vocabulary,
+        default=u"todo",
         required=True,
     )
 
