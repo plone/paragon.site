@@ -27,4 +27,12 @@
         provides="Products.GenericSetup.interfaces.EXTENSION"
         />
 
+    <genericsetup:importStep
+      name="paragon.site"
+      title="paragon.site special import handlers"
+      description=""
+      handler="paragon.site.setuphandlers.setupVarious">
+        <depends name="typeinfo"/>
+    </genericsetup:importStep>
+
 </configure>
