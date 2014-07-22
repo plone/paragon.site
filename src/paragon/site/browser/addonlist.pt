@@ -1,0 +1,41 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      lang="en"
+      metal:use-macro="context/main_template/macros/master"
+      i18n:domain="plone">
+<body>
+
+<metal:content-core fill-slot="content">
+    <metal:content-core define-macro="content">
+    <div id="content">
+        <h1 class="documentFirstHeading">
+            Top 50 Plone addons
+        </h1>
+
+        <h2>The following Addons have already been submitted</h2>
+        <table class="listing">
+            <tr>
+                <th>Title</th>
+                <th>State</th>
+            </tr>
+            <tr tal:repeat="item view/items">
+                <td tal:content="item/title" />
+                <td tal:content="item/state" />
+            </tr>
+        </table>
+        <h2>
+            <a class="button"
+               href="++add++addon"
+               tal:attributes="href string:${portal_url}/addons/++add++addon">
+               Submit an addon for consideration
+            </a>
+        </h2>
+    </div>
+    </metal:content-core>
+</metal:content-core>
+
+</body>
+</html>
+

@@ -17,6 +17,15 @@
       permission="zope2.View"
       />
 
+    <browser:page
+      name="addonlist"
+      for="*"
+      class=".views.AddonList"
+      template="addonlist.pt"
+      layer="..interfaces.IParagonSiteLayer"
+      permission="zope2.View"
+      />
+
     <!-- Publish static files -->
     <browser:resourceDirectory
       name="paragon.site"
