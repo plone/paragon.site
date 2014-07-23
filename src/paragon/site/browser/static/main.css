@@ -6,3 +6,15 @@
 #fieldset-quality span.option span.label {
     font-weight: normal;
 }
+
+.fieldTextFormat {
+    display: none;
+}
+
+.field {
+    margin-bottom: 2em;
+}
+
+.portaltype-addon.userrole-anonymous .contentActions {
+    display: none;
+}

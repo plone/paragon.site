@@ -18,6 +18,14 @@
       />
 
     <browser:page
+      name="submitaddon"
+      for="paragon.site.content.addon.IAddon"
+      class=".views.SubmitAddon"
+      layer="..interfaces.IParagonSiteLayer"
+      permission="zope2.View"
+      />
+
+    <browser:page
       name="addonlist"
       for="*"
       class=".views.AddonList"
@@ -33,6 +41,16 @@
       template="addontable.pt"
       layer="..interfaces.IParagonSiteLayer"
       permission="cmf.ReviewPortalContent"
+      />
+
+    <browser:viewlet
+      manager="plone.app.layout.viewlets.interfaces.IAboveContentTitle"
+      name="submitlink"
+      for="paragon.site.content.addon.IAddon"
+      class=".viewlets.SubmitLinkViewlet"
+      template="submitlink.pt"
+      layer="..interfaces.IParagonSiteLayer"
+      permission="zope2.View"
       />
 
     <!-- Publish static files -->

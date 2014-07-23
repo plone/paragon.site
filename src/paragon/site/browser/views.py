@@ -3,7 +3,7 @@ from AccessControl.SecurityManagement import getSecurityManager
 from Products.CMFCore.utils import getToolByName
 from Products.Five import BrowserView
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
-from Products.CMFCore.utils import getToolByName
+from plone import api
 
 
 class AddonView(BrowserView):
@@ -12,6 +12,18 @@ class AddonView(BrowserView):
 
     def __call__(self):
         return self.template()
+
+
+class SubmitAddon(BrowserView):
+
+    def __call__(self):
+        api.content.transition(self.context, 'submit')
+        api.portal.show_message(
+            message="Thank you for submitting an addon",
+            request=self.request,
+            type='info')
+        portal_url = api.portal.get().absolute_url()
+        self.request.response.redirect(portal_url)
 
 
 class AddonList(BrowserView):
