@@ -4,10 +4,19 @@
   i18n_domain="plone">
 
   <configure zcml:condition="installed AccessControl.security">
+
+    <include package="collective.autopermission" />
+
     <permission
-      id="paragon.site.addAddon"
+      id="paragon.site.AddAddon"
       title="paragon.site: Add Addon"
       />
+
+    <permission
+      id="paragon.site.ReviewAddon"
+      title="paragon.site: Review Addon"
+      />
+
   </configure>
 
 </configure>

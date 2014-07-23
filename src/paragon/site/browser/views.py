@@ -1,4 +1,6 @@
 # -*- coding: UTF-8 -*-
+from AccessControl.SecurityManagement import getSecurityManager
+from Products.CMFCore.utils import getToolByName
 from Products.Five import BrowserView
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from Products.CMFCore.utils import getToolByName
@@ -26,6 +28,11 @@ class AddonList(BrowserView):
                 state = brain.review_state
                 ))
         return results
+
+    def can_review(self):
+        security = getSecurityManager()
+        if security.checkPermission('paragon.site: Review Addon', self.context):
+            return True
 
 
 class AddonTable(BrowserView):

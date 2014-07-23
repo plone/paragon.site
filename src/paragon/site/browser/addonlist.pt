@@ -32,6 +32,13 @@
                Submit an addon for consideration
             </a>
         </h2>
+        <h2>
+            <a href=""
+               tal:condition="view/can_review"
+               tal:attributes="href string:${portal_url}/addons">
+               Jury: Review Talks
+            </a>
+        </h2>
     </div>
     </metal:content-core>
 </metal:content-core>

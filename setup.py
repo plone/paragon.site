@@ -46,6 +46,7 @@ setup(
         'plone.app.referenceablebehavior',
         'plone.formwidget.recaptcha',
         'collective.js.datatables',
+        'collective.autopermission',
     ],
     entry_points="""
     [z3c.autoinclude.plugin]

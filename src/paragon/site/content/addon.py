@@ -74,14 +74,14 @@ class IAddon(model.Schema):
     """
 
     fieldset(
-        'URLs',
+        'urls',
         label=u'URLs',
         fields=['pypi_link', 'github_link', 'homepage']
     )
 
     fieldset(
         'quality',
-        label=u'Quality review',
+        label=u'Quality criteria',
         fields=[
             'pypi_page',
             'public_repo',
@@ -97,6 +97,12 @@ class IAddon(model.Schema):
             'tested',
             'i18n',
         ]
+    )
+
+    fieldset(
+        'review',
+        label=u'Review',
+        fields=['notes', 'verdict']
     )
 
     title = schema.TextLine(
@@ -258,6 +264,23 @@ class IAddon(model.Schema):
         default=u"todo",
         required=True,
     )
+
+    directives.read_permission(notes="paragon.site.ReviewAddon")
+    directives.write_permission(notes="paragon.site.ReviewAddon")
+    notes = RichText(
+        title=_(u'Notes'),
+        description=_(u'Notes about the review and the vedict.'),
+        required=False,
+    )
+
+    directives.read_permission(verdict="paragon.site.ReviewAddon")
+    directives.write_permission(verdict="paragon.site.ReviewAddon")
+    verdict = RichText(
+        title=_(u'Verdict'),
+        description=_(u'Notes about the verdict.'),
+        required=False,
+    )
+
 
 
 @indexer(IAddon)

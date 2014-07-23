@@ -1,9 +1,18 @@
 <?xml version="1.0"?>
 <rolemap>
+  <roles>
+    <role name="Jury"/>
+  </roles>
   <permissions>
+    <permission name="paragon.site: Review Addon" acquire="True">
+      <role name="Manager" />
+      <role name="Site Administrator" />
+      <role name="Jury"/>
+    </permission>
     <permission name="paragon.site: Add Addon" acquire="True">
       <role name="Manager" />
       <role name="Site Administrator" />
+      <role name="Jury"/>
       <role name="Owner"/>
       <role name="Contributor"/>
       <role name="Anonymous"/>
