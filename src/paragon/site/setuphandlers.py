@@ -23,10 +23,11 @@ def setupVarious(context):
 
     site = api.portal.get()
     delete_default_content(site)
-    set_up_content(site)
+    setup_content(site)
+    setup_groups(site)
 
 
-def set_up_content(site):
+def setup_content(site):
     """Create and configure some initial content"""
     if 'addons' in site:
         reinstall = True
@@ -46,3 +47,11 @@ def set_up_content(site):
 def delete_default_content(portal):
     to_delete = ['news', 'events', 'Members', 'front-page']
     portal.manage_delObjects(to_delete)
+
+
+def setup_groups(site):
+    api.group.create(
+        groupname="Jury",
+        title="Jury",
+        description="Members of the jury",
+        roles=["Jury"])

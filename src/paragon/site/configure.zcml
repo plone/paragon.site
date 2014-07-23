@@ -33,6 +33,7 @@
       description=""
       handler="paragon.site.setuphandlers.setupVarious">
         <depends name="typeinfo"/>
+        <depends name="rolemap" />
     </genericsetup:importStep>
 
 </configure>
