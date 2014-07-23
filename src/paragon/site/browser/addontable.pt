@@ -19,9 +19,8 @@
     </script>
 </metal:head>
 
-<metal:content-core fill-slot="content">
-    <metal:content-core define-macro="content">
-    <div id="content">
+<metal:content-core fill-slot="content-core">
+    <metal:content-core define-macro="content-core">
         <h1 class="documentFirstHeading">
             Top 50 Plone addons
         </h1>
@@ -52,7 +51,6 @@
             </tbody>
         </table>
 
-    </div>
     </metal:content-core>
 </metal:content-core>
 

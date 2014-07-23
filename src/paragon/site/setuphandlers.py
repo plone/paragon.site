@@ -29,32 +29,20 @@ def setupVarious(context):
 def set_up_content(site):
     """Create and configure some initial content"""
     if 'addons' in site:
-        return
-    addons = api.content.create(
-        container=site,
-        type='addons_folder',
-        id='addons',
-        title='Addons')
+        reinstall = True
+        addons = site['addons']
+    else:
+        addons = api.content.create(
+            container=site,
+            type='addons_folder',
+            id='addons',
+            title='Addons')
+    addons.setLayout("@@addontable")
+    site.setLayout("@@addonlist")
+    addons.exclude_from_nav = True
+    addons.reindexObject()
+
 
 def delete_default_content(portal):
-    all_content = portal.portal_catalog()
-    if all_content:
-        expected = [
-            'front-page',
-            'news',
-            'aggregator',
-            'events',
-            'aggregator',
-            'Members'
-        ]
-        if not [i.id for i in all_content] == expected:
-            return
-        to_delete = ['news', 'events', 'Members']
-        for i in to_delete:
-            obj = portal[i]
-            modification_date = obj.modification_date.utcdatetime()
-            creation_date = obj.creation_date.utcdatetime()
-            delta = modification_date - creation_date
-            if delta >= timedelta(seconds=2):
-                return
-        portal.manage_delObjects(to_delete)
+    to_delete = ['news', 'events', 'Members', 'front-page']
+    portal.manage_delObjects(to_delete)
