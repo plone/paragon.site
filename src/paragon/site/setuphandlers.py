@@ -23,11 +23,10 @@ def setupVarious(context):
 
     site = api.portal.get()
     delete_default_content(site)
-    setup_content(site)
-    setup_groups(site)
+    setup_site(site)
 
 
-def setup_content(site):
+def setup_site(site):
     """Create and configure some initial content"""
     if 'addons' in site:
         reinstall = True
@@ -42,16 +41,18 @@ def setup_content(site):
     site.setLayout("@@addonlist")
     addons.exclude_from_nav = True
     addons.reindexObject()
-
-
-def delete_default_content(portal):
-    to_delete = ['news', 'events', 'Members', 'front-page']
-    portal.manage_delObjects(to_delete)
-
-
-def setup_groups(site):
     api.group.create(
         groupname="Jury",
         title="Jury",
         description="Members of the jury",
-        roles=["Jury"])
+        roles=["Jury", "Reader", "Reviewer"])
+    api.portal.set_registry_record(
+        "plone.app.discussion.interfaces.IDiscussionSettings.globally_enabled",
+        True)
+    api.portal.set_registry_record(
+        "plone.app.discussion.interfaces.IDiscussionSettings.user_notification_enabled",
+        True)
+
+def delete_default_content(portal):
+    to_delete = ['news', 'events', 'Members', 'front-page']
+    portal.manage_delObjects(to_delete)

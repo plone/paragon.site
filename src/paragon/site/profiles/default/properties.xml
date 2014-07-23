@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<site>
+ <property name="title">Plone Paragon</property>
+ <property name="description">Submitt your favourite addon for the list of Top 50 Plone Addons</property>
+ <property name="email_from_address" type="string">paragon@plone.org</property>
+ <property name="email_from_name" type="string">Plone Paragon Website</property>
+</site>

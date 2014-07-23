@@ -48,6 +48,8 @@ class AddonList(BrowserView):
 
 
 class AddonTable(BrowserView):
+    """
+    """
 
     template = ViewPageTemplateFile('addontable.pt')
 
