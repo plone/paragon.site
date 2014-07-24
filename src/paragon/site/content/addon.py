@@ -106,11 +106,22 @@ class IAddon(model.Schema):
     )
 
     title = schema.TextLine(
-        title=_(u'package_name', default=u'Name of the Addon'),
+        title=_(u'package_name', default=u'Addon'),
         description=_(
             u'as_used_in_buildout',
-            default=u'The name you have to add to a buildout (e.g. Products.PloneFormGen)'),
+            default=u'The name of the addon as used in buildout (e.g. Products.PloneFormGen)'),
         required=True,
+    )
+
+    name = schema.TextLine(
+        title=_(u'submitter_name', default=u'Your Name'),
+        required=False,
+    )
+
+    email = schema.TextLine(
+        title=_(u'submitter_email', default=u'Your email'),
+        description=_(u'In case the jury has a question'),
+        required=False,
     )
 
     summary = RichText(
@@ -281,6 +292,9 @@ class IAddon(model.Schema):
         required=False,
     )
 
+# from plone.autoform.interfaces import ORDER_KEY
+# from paragon.site.content.addon import IAddon
+# IAddon.setTaggedValue(ORDER_KEY, [('IBasic.description', 'before', 'ILeadImage.image')])
 
 
 @indexer(IAddon)

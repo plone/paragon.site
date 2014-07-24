@@ -19,7 +19,7 @@ class SubmitAddon(BrowserView):
     def __call__(self):
         api.content.transition(self.context, 'submit')
         api.portal.show_message(
-            message="Thank you for submitting an addon",
+            message="Thank you for submitting the addon '%s'" % self.context.title,
             request=self.request,
             type='info')
         portal_url = api.portal.get().absolute_url()
