@@ -31,6 +31,8 @@
   </permission-map>
   <permission-map name="View" acquired="False">
    <permission-role>Anonymous</permission-role>
+   <permission-role>Authenticated</permission-role>
+   <permission-role>Jury</permission-role>
   </permission-map>
 
 

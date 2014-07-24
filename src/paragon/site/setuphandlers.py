@@ -45,7 +45,7 @@ def setup_site(site):
         groupname="Jury",
         title="Jury",
         description="Members of the jury",
-        roles=["Jury", "Reader", "Reviewer"])
+        roles=["Jury", "Reader", "Reviewer", "Contributor", "Editor"])
     api.portal.set_registry_record(
         "plone.app.discussion.interfaces.IDiscussionSettings.globally_enabled",
         True)

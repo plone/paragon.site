@@ -1,34 +1,19 @@
 <?xml version="1.0"?>
-<dc-workflow workflow_id="addon_workflow" title="Addon Workflow" description="" state_variable="review_state"         initial_state="private" manager_bypass="False" >
+<dc-workflow workflow_id="addon_workflow" title="Addon Workflow" description="Workflow for anonymous sbmissions and a jury." state_variable="review_state"         initial_state="private" manager_bypass="False" >
  <permission>Access contents information</permission>
  <permission>Change portal events</permission>
  <permission>Modify portal content</permission>
  <permission>Request review</permission>
  <permission>View</permission>
- <state state_id="accepted" title="Approved" >
-  <exit-transition transition_id="thumbsdown" />
-  <exit-transition transition_id="thumbsup" />
-
-
-
- </state>
- <state state_id="nicebutnocigar" title="Not in the Top 50" >
+ <state state_id="accepted" title="Accepted" >
   <exit-transition transition_id="publish" />
-
-
-
- </state>
- <state state_id="pending" title="Pending review" >
-  <description>Waiting to be reviewed, not editable by the owner.</description>
-  <exit-transition transition_id="accept" />
-  <exit-transition transition_id="reject" />
   <exit-transition transition_id="retract" />
   <permission-map name="Access contents information" acquired="False">
+   <permission-role>Contributor</permission-role>
+   <permission-role>Editor</permission-role>
    <permission-role>Manager</permission-role>
    <permission-role>Owner</permission-role>
-   <permission-role>Editor</permission-role>
    <permission-role>Reader</permission-role>
-   <permission-role>Contributor</permission-role>
    <permission-role>Reviewer</permission-role>
    <permission-role>Site Administrator</permission-role>
   </permission-map>
@@ -42,12 +27,54 @@
    <permission-role>Reviewer</permission-role>
    <permission-role>Site Administrator</permission-role>
   </permission-map>
+  <permission-map name="Request review" acquired="True">
+
+  </permission-map>
   <permission-map name="View" acquired="False">
+   <permission-role>Contributor</permission-role>
+   <permission-role>Editor</permission-role>
    <permission-role>Manager</permission-role>
    <permission-role>Owner</permission-role>
-   <permission-role>Editor</permission-role>
    <permission-role>Reader</permission-role>
+   <permission-role>Reviewer</permission-role>
+   <permission-role>Site Administrator</permission-role>
+  </permission-map>
+
+
+ </state>
+ <state state_id="pending" title="Pending review" >
+  <description>Waiting to be reviewed, not editable by the owner.</description>
+  <exit-transition transition_id="accept" />
+  <exit-transition transition_id="make_private" />
+  <exit-transition transition_id="reject" />
+  <permission-map name="Access contents information" acquired="False">
    <permission-role>Contributor</permission-role>
+   <permission-role>Editor</permission-role>
+   <permission-role>Manager</permission-role>
+   <permission-role>Owner</permission-role>
+   <permission-role>Reader</permission-role>
+   <permission-role>Reviewer</permission-role>
+   <permission-role>Site Administrator</permission-role>
+  </permission-map>
+  <permission-map name="Change portal events" acquired="False">
+   <permission-role>Manager</permission-role>
+   <permission-role>Reviewer</permission-role>
+   <permission-role>Site Administrator</permission-role>
+  </permission-map>
+  <permission-map name="Modify portal content" acquired="False">
+   <permission-role>Manager</permission-role>
+   <permission-role>Reviewer</permission-role>
+   <permission-role>Site Administrator</permission-role>
+  </permission-map>
+  <permission-map name="Request review" acquired="True">
+
+  </permission-map>
+  <permission-map name="View" acquired="False">
+   <permission-role>Contributor</permission-role>
+   <permission-role>Editor</permission-role>
+   <permission-role>Manager</permission-role>
+   <permission-role>Owner</permission-role>
+   <permission-role>Reader</permission-role>
    <permission-role>Reviewer</permission-role>
    <permission-role>Site Administrator</permission-role>
   </permission-map>
@@ -56,7 +83,6 @@
  </state>
  <state state_id="private" title="Private" >
   <description>Can only be seen and edited by the owner.</description>
-  <exit-transition transition_id="publish" />
   <exit-transition transition_id="submit" />
   <permission-map name="Access contents information" acquired="False">
    <permission-role>Anonymous</permission-role>
@@ -96,54 +122,91 @@
 
 
  </state>
- <state state_id="published" title="For your consideration" >
+ <state state_id="published" title="Published" >
   <description>Visible to everyone, editable by the owner.</description>
+  <exit-transition transition_id="make_private" />
   <exit-transition transition_id="reject" />
   <exit-transition transition_id="retract" />
-  <exit-transition transition_id="thumbsdown" />
-  <exit-transition transition_id="thumbsup" />
   <permission-map name="Access contents information" acquired="False">
    <permission-role>Anonymous</permission-role>
+   <permission-role>Reviewer</permission-role>
+  </permission-map>
+  <permission-map name="Change portal events" acquired="False">
+   <permission-role>Editor</permission-role>
+   <permission-role>Manager</permission-role>
+   <permission-role>Owner</permission-role>
+   <permission-role>Reviewer</permission-role>
+   <permission-role>Site Administrator</permission-role>
+  </permission-map>
+  <permission-map name="Modify portal content" acquired="False">
+   <permission-role>Editor</permission-role>
+   <permission-role>Manager</permission-role>
+   <permission-role>Owner</permission-role>
+   <permission-role>Reviewer</permission-role>
+   <permission-role>Site Administrator</permission-role>
+  </permission-map>
+  <permission-map name="Request review" acquired="True">
+
+  </permission-map>
+  <permission-map name="View" acquired="False">
+   <permission-role>Anonymous</permission-role>
+   <permission-role>Reviewer</permission-role>
+  </permission-map>
+
+
+ </state>
+ <state state_id="rejected" title="" >
+  <exit-transition transition_id="make_private" />
+  <exit-transition transition_id="submit" />
+  <permission-map name="Access contents information" acquired="False">
+   <permission-role>Contributor</permission-role>
+   <permission-role>Editor</permission-role>
+   <permission-role>Manager</permission-role>
+   <permission-role>Owner</permission-role>
+   <permission-role>Reader</permission-role>
+   <permission-role>Reviewer</permission-role>
+   <permission-role>Site Administrator</permission-role>
   </permission-map>
   <permission-map name="Change portal events" acquired="False">
    <permission-role>Manager</permission-role>
-   <permission-role>Owner</permission-role>
-   <permission-role>Editor</permission-role>
+   <permission-role>Reviewer</permission-role>
    <permission-role>Site Administrator</permission-role>
   </permission-map>
   <permission-map name="Modify portal content" acquired="False">
    <permission-role>Manager</permission-role>
-   <permission-role>Owner</permission-role>
-   <permission-role>Editor</permission-role>
+   <permission-role>Reviewer</permission-role>
    <permission-role>Site Administrator</permission-role>
   </permission-map>
+  <permission-map name="Request review" acquired="True">
+
+  </permission-map>
   <permission-map name="View" acquired="False">
-   <permission-role>Anonymous</permission-role>
+   <permission-role>Contributor</permission-role>
+   <permission-role>Editor</permission-role>
+   <permission-role>Manager</permission-role>
+   <permission-role>Owner</permission-role>
+   <permission-role>Reader</permission-role>
+   <permission-role>Reviewer</permission-role>
+   <permission-role>Site Administrator</permission-role>
   </permission-map>
 
 
  </state>
- <state state_id="recommended" title="Recommended" >
-  <exit-transition transition_id="publish" />
-
-
-
- </state>
- <state state_id="rejected" title="Rejected" >
-  <exit-transition transition_id="retract" />
-  <exit-transition transition_id="submit" />
-
-
-
- </state>
- <transition transition_id="accept" title="Reviewer approves submission" new_state="accepted" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="accept" title="Reviewer accepts addon for recommendation" new_state="accepted" trigger="USER" before_script="" after_script="" >
   <action url="%(content_url)s/content_status_modify?workflow_action=accept" category="workflow" icon="">Accept</action>
   <guard >
    <guard-permission>Review portal content</guard-permission>
   </guard>
 
  </transition>
- <transition transition_id="publish" title="Reviewer publishes content for consideration by the jury" new_state="published" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="make_private" title="" new_state="private" trigger="USER" before_script="" after_script="" >
+  <action url="%(content_url)s/content_status_modify?workflow_action=make_private" category="workflow" icon="">Make private</action>
+  <guard >
+   <guard-permission>Review portal content</guard-permission>
+  </guard>
+
+ </transition>
+ <transition transition_id="publish" title="Reviewer publishes content" new_state="published" trigger="USER" before_script="" after_script="" >
   <description>Publishing the item makes it visible to other users.</description>
   <action url="%(content_url)s/content_status_modify?workflow_action=publish" category="workflow" icon="">Publish</action>
   <guard >
@@ -151,41 +214,26 @@
   </guard>
 
  </transition>
- <transition transition_id="reject" title="Reviewer rejects addon" new_state="rejected" trigger="USER" before_script="" after_script="" >
-  <description>Sending the item back will return the item to the original author instead of publishing it. You should preferably include a reason for why it was not published.</description>
+ <transition transition_id="reject" title="Reviewer rejects item" new_state="rejected" trigger="USER" before_script="" after_script="" >
   <action url="%(content_url)s/content_status_modify?workflow_action=reject" category="workflow" icon="">Reject</action>
   <guard >
    <guard-permission>Review portal content</guard-permission>
   </guard>
 
  </transition>
- <transition transition_id="retract" title="Member retracts submission" new_state="private" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="retract" title="Reviewer sends back to re-review" new_state="pending" trigger="USER" before_script="" after_script="" >
   <description>If you submitted the item by mistake or want to perform additional edits, this will take it back.</description>
   <action url="%(content_url)s/content_status_modify?workflow_action=retract" category="workflow" icon="">Retract</action>
   <guard >
-   <guard-permission>Request review</guard-permission>
+   <guard-permission>Review portal content</guard-permission>
   </guard>
 
  </transition>
- <transition transition_id="submit" title="Member submits content for publication" new_state="pending" trigger="USER" before_script="" after_script="" >
-  <description>Puts your item in a review queue, so it can be published on the site.</description>
-  <action url="%(content_url)s/content_status_modify?workflow_action=submit" category="workflow" icon="">Submit for publication</action>
+ <transition transition_id="submit" title="Submit for consideration" new_state="pending" trigger="USER" before_script="" after_script="" >
+  <description>Puts your item in a review queue, so it can be reviewed.</description>
+  <action url="%(content_url)s/content_status_modify?workflow_action=submit" category="workflow" icon="">Submit for consideration</action>
   <guard >
    <guard-permission>Request review</guard-permission>
-  </guard>
-
- </transition>
- <transition transition_id="thumbsdown" title="Thumbs downs!" new_state="nicebutnocigar" trigger="USER" before_script="" after_script="" >
-
-  <guard >
-   <guard-role>Jury, Manager</guard-role>
-  </guard>
-
- </transition>
- <transition transition_id="thumbsup" title="Thumbs up!" new_state="recommended" trigger="USER" before_script="" after_script="" >
-
-  <guard >
-   <guard-role>Jury, Manager</guard-role>
   </guard>
 
  </transition>
