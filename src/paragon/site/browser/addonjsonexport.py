@@ -12,6 +12,10 @@ import base64
 import json
 import os
 
+BLACKLIST = [
+    "notes",
+    "verdict",
+]
 
 class AddonJSONList(BrowserView):
     """Exports addons as JSON.
@@ -46,6 +50,9 @@ class AddonJSONList(BrowserView):
         """
         data = {}
         for name, field in getFieldsInOrder(IAddon):
+            if name in BLACKLIST:
+                continue
+
             value = getattr(obj, name)
             if IRichTextValue.providedBy(value):
                 value = value.output
