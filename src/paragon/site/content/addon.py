@@ -76,15 +76,17 @@ class IAddon(model.Schema):
     fieldset(
         'urls',
         label=u'URLs',
-        fields=['pypi_link', 'github_link', 'homepage']
+        fields=[
+            'pypi_link',
+            'github_link',
+            'homepage'
+        ]
     )
 
     fieldset(
         'experience',
         label=u'User experience quality',
         fields=[
-            # 'pypi_page',
-            # 'public_repo',
             'updated_last_plone_version',
             'enduser_documentation',
             'used_in_production',
@@ -99,15 +101,12 @@ class IAddon(model.Schema):
         'codequality',
         label=u'Code quality',
         fields=[
-            # 'pypi_page',
-            # 'public_repo',
             'dexterity_ready',
             'code_structure',
             'internal_documentation',
             'tested',
         ]
     )
-
 
     fieldset(
         'review',
@@ -140,12 +139,21 @@ class IAddon(model.Schema):
         required=True,
     )
 
-    directives.widget(screenshots=MultiFileFieldWidget)
-    screenshots = schema.List(
-        title=u'Screenshots',
-        description=_(u'Upload some screenshots showing the main product '
-                      u'functionality and features.'),
-        value_type=NamedBlobImage(),
+    screenshot_1 = NamedBlobImage(
+        title=_(u"Screenshot 1"),
+        description=u"",
+        required=False,
+    )
+
+    screenshot_2 = NamedBlobImage(
+        title=_(u"Screenshot 2"),
+        description=u"",
+        required=False,
+    )
+
+    screenshot_3 = NamedBlobImage(
+        title=_(u"Screenshot 3"),
+        description=u"",
         required=False,
     )
 
