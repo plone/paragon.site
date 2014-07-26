@@ -64,7 +64,7 @@ certification_vocabulary = SimpleVocabulary(
      SimpleTerm(value=u'does_not_apply',
                 title=_(u'Does not apply')),
      SimpleTerm(value=u'todo',
-                title=_(u'Find out')),
+                title=_(u'I don''t know')),
      ]
 )
 
@@ -80,24 +80,34 @@ class IAddon(model.Schema):
     )
 
     fieldset(
-        'quality',
-        label=u'Quality criteria',
+        'experience',
+        label=u'User experience quality',
         fields=[
-            'pypi_page',
-            'public_repo',
+            # 'pypi_page',
+            # 'public_repo',
             'updated_last_plone_version',
-            'dexterity_ready',
-            'proper_screenshots',
-            'used_in_production',
-            'install_uninstall_profile',
-            'code_structure',
-            'maintained',
-            'internal_documentation',
             'enduser_documentation',
-            'tested',
+            'used_in_production',
+            'maintained',
+            'install_uninstall_profile',
             'i18n',
+            'proper_screenshots',
         ]
     )
+
+    fieldset(
+        'codequality',
+        label=u'Code quality',
+        fields=[
+            # 'pypi_page',
+            # 'public_repo',
+            'dexterity_ready',
+            'code_structure',
+            'internal_documentation',
+            'tested',
+        ]
+    )
+
 
     fieldset(
         'review',
@@ -172,41 +182,25 @@ class IAddon(model.Schema):
         required=False
     )
 
-    directives.widget(pypi_page=RadioFieldWidget)
-    pypi_page = schema.Choice(
-        title=_(u'Has a curated PyPi page (README.rst/README.md)'),
-        vocabulary=certification_vocabulary,
-        default=u"todo",
-        required=True,
-    )
+    # directives.widget(pypi_page=RadioFieldWidget)
+    # pypi_page = schema.Choice(
+    #     title=_(u'Has a curated PyPi page (README.rst/README.md)'),
+    #     vocabulary=certification_vocabulary,
+    #     default=u"todo",
+    #     required=True,
+    # )
 
-    directives.widget(public_repo=RadioFieldWidget)
-    public_repo = schema.Choice(
-        title=_(u'Has a public and open to contributions repo (GitHub/BitBucket, etc)'),
-        vocabulary=certification_vocabulary,
-        default=u"todo",
-        required=True,
-    )
+    # directives.widget(public_repo=RadioFieldWidget)
+    # public_repo = schema.Choice(
+    #     title=_(u'Has a public and open to contributions repo (GitHub/BitBucket, etc)'),
+    #     vocabulary=certification_vocabulary,
+    #     default=u"todo",
+    #     required=True,
+    # )
 
     directives.widget(updated_last_plone_version=RadioFieldWidget)
     updated_last_plone_version = schema.Choice(
         title=_(u'Works on latest Plone version'),
-        vocabulary=certification_vocabulary,
-        default=u"todo",
-        required=True,
-    )
-
-    directives.widget(dexterity_ready=RadioFieldWidget)
-    dexterity_ready = schema.Choice(
-        title=_(u'Dexterity ready'),
-        vocabulary=certification_vocabulary,
-        default=u"todo",
-        required=True,
-    )
-
-    directives.widget(proper_screenshots=RadioFieldWidget)
-    proper_screenshots = schema.Choice(
-        title=_(u'Has proper screenshots'),
         vocabulary=certification_vocabulary,
         default=u"todo",
         required=True,
@@ -228,14 +222,6 @@ class IAddon(model.Schema):
         required=True,
     )
 
-    directives.widget(code_structure=RadioFieldWidget)
-    code_structure = schema.Choice(
-        title=_(u'Code structure follows best practice'),
-        vocabulary=certification_vocabulary,
-        default=u"todo",
-        required=True,
-    )
-
     directives.widget(maintained=RadioFieldWidget)
     maintained = schema.Choice(
         title=_(u'Existed and maintained for at least 6 months'),
@@ -244,25 +230,10 @@ class IAddon(model.Schema):
         required=True,
     )
 
-    directives.widget(internal_documentation=RadioFieldWidget)
-    internal_documentation = schema.Choice(
-        title=_(u'Internal documentation (documentation, interfaces, etc.)'),
-        vocabulary=certification_vocabulary,
-        default=u"todo",
-        required=True,
-    )
-
     directives.widget(enduser_documentation=RadioFieldWidget)
     enduser_documentation = schema.Choice(
-        title=_(u'End-user documentation'),
-        vocabulary=certification_vocabulary,
-        default=u"todo",
-        required=True,
-    )
 
-    directives.widget(tested=RadioFieldWidget)
-    tested = schema.Choice(
-        title=_(u'Fair test coverage'),
+        title=_(u'End-user documentation'),
         vocabulary=certification_vocabulary,
         default=u"todo",
         required=True,
@@ -270,10 +241,49 @@ class IAddon(model.Schema):
 
     directives.widget(i18n=RadioFieldWidget)
     i18n = schema.Choice(
-        title=_(u'Internationalized'),
+        title=_(u'Internationalizion ready'),
         vocabulary=certification_vocabulary,
         default=u"todo",
         required=True,
+    )
+
+    directives.widget(proper_screenshots=RadioFieldWidget)
+    proper_screenshots = schema.Choice(
+        title=_(u'Has proper screenshots'),
+        vocabulary=certification_vocabulary,
+        default=u"todo",
+        required=False,
+    )
+
+    directives.widget(dexterity_ready=RadioFieldWidget)
+    dexterity_ready = schema.Choice(
+        title=_(u'Dexterity ready'),
+        vocabulary=certification_vocabulary,
+        default=u"todo",
+        required=False,
+    )
+
+    directives.widget(code_structure=RadioFieldWidget)
+    code_structure = schema.Choice(
+        title=_(u'Code structure follows best practice'),
+        vocabulary=certification_vocabulary,
+        default=u"todo",
+        required=False,
+    )
+
+    directives.widget(internal_documentation=RadioFieldWidget)
+    internal_documentation = schema.Choice(
+        title=_(u'Internal documentation (how to extend, interfaces, etc.)'),
+        vocabulary=certification_vocabulary,
+        default=u"todo",
+        required=False,
+    )
+    directives.widget(tested=RadioFieldWidget)
+    tested = schema.Choice(
+        title=_(u'Fair test coverage'),
+        vocabulary=certification_vocabulary,
+        default=u"todo",
+        required=False,
     )
 
     directives.read_permission(notes="paragon.site.ReviewAddon")
