@@ -64,7 +64,7 @@ certification_vocabulary = SimpleVocabulary(
      SimpleTerm(value=u'does_not_apply',
                 title=_(u'Does not apply')),
      SimpleTerm(value=u'todo',
-                title=_(u'I don''t know')),
+                title=_(u"I don't know")),
      ]
 )
 
