@@ -3,7 +3,5 @@
   <version>1</version>
   <dependencies>
     <dependency>profile-plone.app.contenttypes:plone-content</dependency>
-    <dependency>profile-Products.PloneFormGen:default</dependency>
-    <dependency>profile-collective.pfg.dexterity:default</dependency>
   </dependencies>
 </metadata>
