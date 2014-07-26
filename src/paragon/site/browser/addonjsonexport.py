@@ -32,7 +32,7 @@ class AddonJSONList(BrowserView):
         catalog = api.portal.get_tool('portal_catalog')
         brains = catalog(
             portal_type='addon',
-            # review_state='Approved'
+            review_state='published'
             )
         for brain in brains:
             obj = brain.getObject()
@@ -59,5 +59,5 @@ class AddonJSONList(BrowserView):
                     if raw:
                         data[shotname] = base64.b64encode(raw)
             else:
-                data[name] = self.convert(value)
+                data[name] = value
         return data
