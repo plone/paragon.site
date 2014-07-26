@@ -45,13 +45,18 @@ def setup_site(site):
         groupname="Jury",
         title="Jury",
         description="Members of the jury",
-        roles=["Jury", "Reader", "Reviewer", "Contributor", "Editor"])
+        roles=["Jury"])
     api.portal.set_registry_record(
         "plone.app.discussion.interfaces.IDiscussionSettings.globally_enabled",
         True)
     api.portal.set_registry_record(
         "plone.app.discussion.interfaces.IDiscussionSettings.user_notification_enabled",
         True)
+    api.group.grant_roles(
+        groupname='Jury',
+        roles=["Reader", "Reviewer", "Contributor", "Editor"],
+        obj=addons)
+
 
 def delete_default_content(portal):
     to_delete = ['news', 'events', 'Members', 'front-page']
