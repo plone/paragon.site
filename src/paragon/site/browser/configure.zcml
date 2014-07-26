@@ -53,6 +53,15 @@
       permission="zope2.View"
       />
 
+    <!-- json export -->
+    <browser:page
+      name="jsonexport"
+      for="*"
+      class=".addonjsonexport.AddonJSONList"
+      layer="..interfaces.IParagonSiteLayer"
+      permission="cmf.ReviewPortalContent"
+      />
+
     <!-- Publish static files -->
     <browser:resourceDirectory
       name="paragon.site"
