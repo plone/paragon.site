@@ -190,22 +190,6 @@ class IAddon(model.Schema):
         required=False
     )
 
-    # directives.widget(pypi_page=RadioFieldWidget)
-    # pypi_page = schema.Choice(
-    #     title=_(u'Has a curated PyPi page (README.rst/README.md)'),
-    #     vocabulary=certification_vocabulary,
-    #     default=u"todo",
-    #     required=True,
-    # )
-
-    # directives.widget(public_repo=RadioFieldWidget)
-    # public_repo = schema.Choice(
-    #     title=_(u'Has a public and open to contributions repo (GitHub/BitBucket, etc)'),
-    #     vocabulary=certification_vocabulary,
-    #     default=u"todo",
-    #     required=True,
-    # )
-
     directives.widget(updated_last_plone_version=RadioFieldWidget)
     updated_last_plone_version = schema.Choice(
         title=_(u'Works on latest Plone version'),
