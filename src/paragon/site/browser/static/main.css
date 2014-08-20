@@ -18,3 +18,13 @@
 .portaltype-addon.userrole-anonymous .contentActions {
     display: none;
 }
+
+.template-addonlist .left {
+    float: left;
+    width: 45%;
+}
+
+.template-addonlist .right {
+    float: right;
+    width: 45%;
+}

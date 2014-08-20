@@ -1,11 +1,13 @@
 # -*- coding: UTF-8 -*-
-from plone.app.controlpanel.security import ISecuritySchema
-from plone import api
 from Products.CMFPlone.interfaces.constrains import ISelectableConstrainTypes
-from plone.app.dexterity.behaviors import constrains
 from datetime import timedelta
+from plone import api
+from plone.app.controlpanel.security import ISecuritySchema
+from plone.app.dexterity.behaviors import constrains
+from plone.app.textfield.value import RichTextValue
 
 import logging
+import pkg_resources
 
 PROFILE_ID = 'profile-paragon.site:default'
 logger = logging.getLogger('paragon.site')
@@ -28,6 +30,22 @@ def setupVarious(context):
 
 def setup_site(site):
     """Create and configure some initial content"""
+    if 'paragon' not in site:
+        frontpage = api.content.create(
+            container=site,
+            type='Document',
+            id='paragon',
+            title='Welcome to Paragon')
+        frontpage_text = pkg_resources.resource_string(
+            __name__, "frontpage.html")
+        frontpage.text = RichTextValue(
+            frontpage_text,
+            'text/html',
+            'text/x-html-safe'
+        )
+    frontpage.setLayout("@@addonlist")
+    site.setDefaultPage('paragon')
+
     if 'addons' in site:
         reinstall = True
         addons = site['addons']
@@ -38,9 +56,9 @@ def setup_site(site):
             id='addons',
             title='Addons')
     addons.setLayout("@@addontable")
-    site.setLayout("@@addonlist")
     addons.exclude_from_nav = True
     addons.reindexObject()
+
     api.group.create(
         groupname="Jury",
         title="Jury",
