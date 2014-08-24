@@ -12,8 +12,8 @@
                         tal:define="items view/items">
 
         <div class="right">
-          <h2 tal:condition="items">The following Addons have already been submitted.</h2>
-          <h2 tal:condition="not:items">So far no Addons have been submitted.</h2>
+          <h2 tal:condition="items">The following Add-ons have already been submitted.</h2>
+          <h2 tal:condition="not:items">So far no Add-ons have been submitted.</h2>
           <table class="listing"  tal:condition="items">
               <tr>
                   <th>Title</th>
@@ -28,16 +28,16 @@
               <a class="button"
                  href="++add++addon"
                  tal:attributes="href string:${portal_url}/addons/++add++addon">
-                 Submit an addon for consideration
+                 Submit an add-on for consideration
               </a>
           </h2>
-          <h2>
+          <h3>
               <a href=""
                  tal:condition="view/can_review"
                  tal:attributes="href string:${portal_url}/addons">
                  Jury: Review Talks
               </a>
-          </h2>
+          </h3>
         </div>
 
         <div class="left" tal:condition="context/text | nothing">

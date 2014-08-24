@@ -35,7 +35,7 @@ def setup_site(site):
             container=site,
             type='Document',
             id='paragon',
-            title='Welcome to Paragon')
+            title='The hunt is on...')
         frontpage_text = pkg_resources.resource_string(
             __name__, "frontpage.html")
         frontpage.text = RichTextValue(

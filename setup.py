@@ -47,6 +47,7 @@ setup(
         'plone.formwidget.recaptcha',
         'collective.js.datatables',
         'collective.autopermission',
+        'paragon.theme',
     ],
     entry_points="""
     [z3c.autoinclude.plugin]
