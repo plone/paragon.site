@@ -24,13 +24,13 @@
                   <td tal:content="item/state" />
               </tr>
           </table>
-          <h2>
+          <div class="submit_link">
               <a class="button"
                  href="++add++addon"
                  tal:attributes="href string:${portal_url}/addons/++add++addon">
                  Submit an add-on for consideration
               </a>
-          </h2>
+          </div>
           <h3>
               <a href=""
                  tal:condition="view/can_review"

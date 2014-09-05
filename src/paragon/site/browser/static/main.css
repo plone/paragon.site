@@ -28,3 +28,23 @@
     float: right;
     width: 45%;
 }
+
+#content  .submit_link a {
+    margin: 10px 0;
+    font-size: 1.2em;
+    font-weight: bold;
+    background-color: #75ad0a;
+    padding: 10px;
+    display: inline-block;
+    cursor: pointer;
+    color: #fff;
+    border-radius: 10px;
+    border: 1px solid #fff  ;
+}
+
+#content .submit_link a:hover {
+    background-color: #fff;
+    color: #75ad0a !important;
+    border: 1px solid #75ad0a;
+    text-decoration: none;
+}
