@@ -19,10 +19,7 @@
                   <th>Name</th>
               </tr>
               <tr tal:repeat="item view/items">
-                  <td>
-                    <a tal:attributes="href item/pypi_link"
-                       tal:content="item/title" />
-                  </td>
+                  <td tal:content="item/title"/>
 
               </tr>
           </table>

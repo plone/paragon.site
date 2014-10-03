@@ -38,11 +38,9 @@ class AddonList(BrowserView):
             sort_on='sortable_title',
         )
         for brain in brains:
-            obj = brain.getObject()
             results.append(dict(
                 title = brain.Title,
-                state = brain.review_state,
-                pypi_link = obj.pypi_link,
+                state = brain.review_state
                 ))
         return results
 
