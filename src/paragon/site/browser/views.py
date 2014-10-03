@@ -41,6 +41,7 @@ class AddonList(BrowserView):
             results.append(dict(
                 title = brain.Title,
                 state = brain.review_state
+                pypi_link = brain.pypi_link,
                 ))
         return results
 
