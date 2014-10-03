@@ -33,7 +33,10 @@ class AddonList(BrowserView):
     def items(self):
         results = []
         catalog = getToolByName(self.context, 'portal_catalog')
-        brains = catalog.unrestrictedSearchResults(portal_type='addon')
+        brains = catalog.unrestrictedSearchResults(
+            portal_type='addon',
+            sort_on='sortable_title',
+        )
         for brain in brains:
             results.append(dict(
                 title = brain.Title,
@@ -66,5 +69,6 @@ class AddonTable(BrowserView):
                 github_link=obj.github_link,
                 state=brain.review_state,
                 categories=', '.join(obj.categories),
+                submitter=obj.name,
                 ))
         return results

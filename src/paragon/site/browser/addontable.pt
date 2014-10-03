@@ -32,6 +32,7 @@
                 <th>Title</th>
                 <th>Pypi-link</th>
                 <th>Github-link</th>
+                <th>Submitter</th>
                 <th>Tags</th>
                 <th>State</th>
             </tr>
@@ -45,6 +46,7 @@
                 </td>
                 <td><a tal:attributes="href item/pypi_link">pypi</a></td>
                 <td><a tal:attributes="href item/github_link">github</a></td>
+                <td tal:content="item/submitter"></td>
                 <td tal:content="item/categories" />
                 <td tal:content="item/state" />
             </tr>
