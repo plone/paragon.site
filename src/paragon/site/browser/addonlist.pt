@@ -16,12 +16,14 @@
           <h2 tal:condition="not:items">So far no Add-ons have been submitted.</h2>
           <table class="listing"  tal:condition="items">
               <tr>
-                  <th>Title</th>
-                  <th>State</th>
+                  <th>Name</th>
               </tr>
               <tr tal:repeat="item view/items">
-                  <td tal:content="item/title" />
-                  <td tal:content="item/state" />
+                  <td>
+                    <a tal:attributes="href item/pypi_link"
+                       tal:content="item/title" />
+                  </td>
+
               </tr>
           </table>
           <div class="submit_link">
