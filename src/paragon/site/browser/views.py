@@ -40,7 +40,7 @@ class AddonList(BrowserView):
         for brain in brains:
             results.append(dict(
                 title = brain.Title,
-                state = brain.review_state
+                state = brain.review_state,
                 pypi_link = brain.pypi_link,
                 ))
         return results
@@ -66,7 +66,7 @@ class AddonTable(BrowserView):
             results.append(dict(
                 title=brain.Title,
                 url=brain.getURL(),
-                pypi_link=obj.pypi_link,
+                pypi_link=brain.pypi_link,
                 github_link=obj.github_link,
                 state=brain.review_state,
                 categories=', '.join(obj.categories),
