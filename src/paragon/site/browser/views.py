@@ -36,6 +36,7 @@ class AddonList(BrowserView):
         brains = catalog.unrestrictedSearchResults(
             portal_type='addon',
             sort_on='sortable_title',
+            review_state='pending',
         )
         for brain in brains:
             results.append(dict(
