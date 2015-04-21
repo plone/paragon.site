@@ -35,6 +35,9 @@
                 <th>Submitter</th>
                 <th>Tags</th>
                 <th>State</th>
+                <th>Average Vote</th>
+                <th>Total Votes</th>
+                <th>My Vote</th>
             </tr>
             </thead>
             <tbody>
@@ -49,6 +52,9 @@
                 <td tal:content="item/submitter"></td>
                 <td tal:content="item/categories" />
                 <td tal:content="item/state" />
+                <td tal:content="item/average_vote" />
+                <td tal:content="item/number_of_votes" />
+                <td tal:content="python: item['tally']['mine'] if item['tally']['mine'] else '-'" />
             </tr>
             </tbody>
         </table>

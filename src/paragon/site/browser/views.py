@@ -3,6 +3,7 @@ from AccessControl.SecurityManagement import getSecurityManager
 from Products.CMFCore.utils import getToolByName
 from Products.Five import BrowserView
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
+from cioppino.twothumbs import rate
 from plone import api
 
 
@@ -40,9 +41,9 @@ class AddonList(BrowserView):
         )
         for brain in brains:
             results.append(dict(
-                title = brain.Title,
-                state = brain.review_state,
-                pypi_link = brain.pypi_link,
+                title=brain.Title,
+                state=brain.review_state,
+                pypi_link=brain.pypi_link,
                 ))
         return results
 
@@ -65,6 +66,15 @@ class AddonTable(BrowserView):
         brains = catalog(portal_type='addon')
         for brain in brains:
             obj = brain.getObject()
+            tally = rate.getTally(obj)
+            number_of_votes = tally['ups'] + tally['downs']
+            if not number_of_votes:
+                average_vote = '-'
+            else:
+                average_vote = (tally['ups'] - tally['downs']) \
+                    / number_of_votes
+                if average_vote > 0:
+                    average_vote = '+%s' % average_vote
             results.append(dict(
                 title=brain.Title,
                 url=brain.getURL(),
@@ -73,5 +83,8 @@ class AddonTable(BrowserView):
                 state=brain.review_state,
                 categories=', '.join(obj.categories),
                 submitter=obj.name,
+                tally=tally,
+                number_of_votes=number_of_votes,
+                average_vote=average_vote,
                 ))
         return results

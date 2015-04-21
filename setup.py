@@ -48,6 +48,7 @@ setup(
         'collective.js.datatables',
         'collective.autopermission',
         'paragon.theme',
+        'cioppino.twothumbs',
     ],
     entry_points="""
     [z3c.autoinclude.plugin]
