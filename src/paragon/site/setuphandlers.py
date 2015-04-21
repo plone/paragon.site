@@ -43,6 +43,8 @@ def setup_site(site):
             'text/html',
             'text/x-html-safe'
         )
+    else:
+        frontpage = site['paragon']
     frontpage.setLayout("@@addonlist")
     site.setDefaultPage('paragon')
 

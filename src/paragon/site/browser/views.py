@@ -19,7 +19,7 @@ class SubmitAddon(BrowserView):
     def __call__(self):
         api.content.transition(self.context, 'submit')
         api.portal.show_message(
-            message="Thank you for submitting the addon '%s'" % self.context.title,
+            message="Thank you for submitting '%s'" % self.context.title,
             request=self.request,
             type='info')
         portal_url = api.portal.get().absolute_url()
@@ -48,7 +48,8 @@ class AddonList(BrowserView):
 
     def can_review(self):
         security = getSecurityManager()
-        if security.checkPermission('paragon.site: Review Addon', self.context):
+        if security.checkPermission(
+                'paragon.site: Review Addon', self.context):
             return True
 
 
