@@ -2,7 +2,9 @@
 paragon.site
 =============
 
-paragon.plone.org
+:About: paragon.plone.org
+
+**This project is deprecated for more info see https://plone.org/community/paragon-project**
 
 Configuration
 =============
